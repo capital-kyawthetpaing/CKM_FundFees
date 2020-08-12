@@ -6,7 +6,7 @@ namespace DL
     {
         public string GetConnectionString()
         {
-            string filePath = @"C:\DBConfig\DBConfig.ini";
+            string filePath = @"D:\DBConfig\DBConfig.ini";
 
             if (System.IO.File.Exists(filePath))
             {
