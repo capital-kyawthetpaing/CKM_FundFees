@@ -38,7 +38,7 @@
     </div>
 </div>
 @section Scripts{
-    <script type="text/javascript">
+<script type="text/javascript">
         $(document).ready(function () {
             $("#btnLogin").click(function () {
                 if (!($('#txtMemberID').val().trim() == '' || $('#txtPassword').val().trim() == '')) {
@@ -46,10 +46,9 @@
                         MemberID: $('#txtMemberID').val(),
                         Password: $('#txtPassword').val()
                     };
-                    alert(Umodel.MemberID + "" + Umodel.Password);
-                    
+
                     $.ajax({
-                        url: "/api/UserApi/Sp_Select_Login",
+                        url: '@Url.Action("Sp_Select_Login", "api/UserApi")',
                         type: 'POST',
                         dataType: 'json',
                         data: Umodel,
@@ -72,10 +71,10 @@
                         error: function (xhr, textStatus, errorThrown) {
                             console.log('Error in Operation');
                         }
-                    });  
+                    });
                 }
             })
         });
-  
-    </script>
+
+</script>
     }

@@ -6,7 +6,7 @@ namespace DL
     {
         public string GetConnectionString()
         {
-            string filePath = @"D:\DBConfig\DBConfig.ini";
+            string filePath = @"C:\DBConfig\DBConfig.ini";
 
             if (System.IO.File.Exists(filePath))
             {
@@ -22,10 +22,10 @@ namespace DL
         {
             IniFileReader ifd = new IniFileReader(filePath);
 
-            return "Data Source=" + ifd.IniReadValue("Database", "Accele").Split(',')[0] +
-                    ";Initial Catalog=" + ifd.IniReadValue("Database", "Accele").Split(',')[1] +
-                    ";Persist Security Info=True;User ID=" + ifd.IniReadValue("Database", "Accele").Split(',')[2] +
-                    ";Password=" + ifd.IniReadValue("Database", "Accele").Split(',')[3] +
+            return "Data Source=" + ifd.IniReadValue("Database", "CKMFC_FundManagement").Split(',')[0] +
+                    ";Initial Catalog=" + ifd.IniReadValue("Database", "CKMFC_FundManagement").Split(',')[1] +
+                    ";Persist Security Info=True;User ID=" + ifd.IniReadValue("Database", "CKMFC_FundManagement").Split(',')[2] +
+                    ";Password=" + ifd.IniReadValue("Database", "CKMFC_FundManagement").Split(',')[3] +
                     ";";
         }
     }

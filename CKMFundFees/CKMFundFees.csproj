@@ -350,6 +350,7 @@
     <Content Include="login\fonts\poppins\Poppins-SemiBoldItalic.ttf" />
     <Content Include="login\fonts\poppins\Poppins-Thin.ttf" />
     <Content Include="login\fonts\poppins\Poppins-ThinItalic.ttf" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -2684,7 +2685,6 @@
     <Content Include="vendors\Flot\examples\series-toggle\index.html" />
     <Content Include="vendors\Flot\examples\series-types\index.html" />
     <Content Include="vendors\Flot\examples\shared\jquery-ui\jquery-ui.min.css" />
-    <Content Include="vendors\Flot\examples\shared\jquery-ui\jquery-ui.min.js" />
     <Content Include="vendors\Flot\examples\stacking\index.html" />
     <Content Include="vendors\Flot\examples\symbols\index.html" />
     <Content Include="vendors\Flot\examples\threshold\index.html" />
@@ -2864,9 +2864,6 @@
     <Content Include="vendors\gauge.js\dist\gauge.min.js" />
     <Content Include="vendors\gauge.js\favicon.ico" />
     <Content Include="vendors\gauge.js\index.html" />
-    <Content Include="vendors\google-code-prettify\bin\prettify.min.css" />
-    <Content Include="vendors\google-code-prettify\bin\prettify.min.js" />
-    <Content Include="vendors\google-code-prettify\bin\run_prettify.min.js" />
     <Content Include="vendors\google-code-prettify\CHANGES.html" />
     <Content Include="vendors\google-code-prettify\examples\quine.html" />
     <Content Include="vendors\google-code-prettify\README-zh-Hans.html" />
@@ -4407,6 +4404,7 @@
     <Content Include="vendors\validator\index.html" />
     <Content Include="vendors\validator\multifield.js" />
     <Content Include="vendors\validator\validator.js" />
+    <Content Include="Views\User\UserLogin.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -5450,13 +5448,11 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
-    <Content Include="Views\User\UserLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\UserApi\" />
-    <Folder Include="Views\UserAuthentication\" />
+    <Folder Include="vendors\google-code-prettify\bin\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
