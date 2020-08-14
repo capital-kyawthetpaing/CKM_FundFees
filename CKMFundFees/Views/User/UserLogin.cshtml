@@ -5,7 +5,7 @@
 }
 
 <div class="limiter">
-    <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+    <div class="container-login100" style="background-image: url('../login/images/bg-01.jpg');">
         <div class="wrap-login100">
             <form class="login100-form validate-form" id="log">
                 <span class="login100-form-logo">
@@ -27,9 +27,10 @@
                 </div>
 
                 <div class="container-login100-form-btn">
-                    <button class="login100-form-btn" onclick="btnLoginClick()">
+                    <input type="button" class="login100-form-btn" value="Login" id="btnLogin"/>
+                    @*<button id="btnLogin"class="login100-form-btn" onclick="btnLoginClick()">
                         Login
-                    </button>
+                    </button>*@
                 </div>
 
             </form>
@@ -39,40 +40,42 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-
+            $("#btnLogin").click(function () {
+                if (!($('#txtMemberID').val().trim() == '' || $('#txtPassword').val().trim() == '')) {
+                    var Umodel = {
+                        MemberID: $('#txtMemberID').val(),
+                        Password: $('#txtPassword').val()
+                    };
+                    alert(Umodel.MemberID + "" + Umodel.Password);
+                    
+                    $.ajax({
+                        url: "/api/UserApi/Sp_Select_Login",
+                        type: 'POST',
+                        dataType: 'json',
+                        data: Umodel,
+                        headers:
+                        {
+                            Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
+                        },
+                        success: function (data) {
+                            var userdata = JSON.parse(data);
+                            if (userdata.length > 0) {
+                                location.href = '@Url.Action("Index", "Home")';
+                            }
+                            else {
+                                alert("Login Failed. Invalid UserName and Password.")
+                                $('#txtMemberID').val("");
+                                $('#txtPassword').val("");
+                            }
+                            //alert(result)
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log('Error in Operation');
+                        }
+                    });  
+                }
+            })
         });
-
-        //prevent default submit
-        $("#log").submit(function (e) {
-            return false;
-        });
-        function btnLoginClick() {
-            if (!($('#txtMemberID').val().trim() == '' || $('#txtPassword').val().trim() == '')) {
-                var Umodel = {
-                    MemberID: $('#txtMemberID').val(),
-                    Password: $('#txtPassword').val()
-                };
-
-                $.ajax({
-                    url: '@Url.Action("Sp_Select_Login", "api/UserApi")',
-                    method: 'POST',
-                    dataType: 'json',
-                    contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(Umodel),
-                    headers:
-                    {
-                        Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
-                    },
-
-                    success: function (data) {
-                        alert(data);
-                        $("#data").html(result);
-                    },
-
-                    error: function (data) {
-                        alert("Login Fail!!")
-                    }
-                });
-                        
-        </script>
+  
+    </script>
     }
