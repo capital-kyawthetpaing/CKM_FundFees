@@ -13,7 +13,7 @@
     <div class="col-lg-4"></div>
     <div class="content">
 
-        <div class="col-lg-5"></div>
+        <div class="col-lg-3"></div>
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-header card-block">
@@ -31,24 +31,32 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col col-sm-5"><label class=" form-control-label">Members</label></div>
-                        <div class="col col-sm-6"><input type="text" class="form-control-sm" /></div>
+                        <div class="col col-sm-5"><label class=" form-control-label">Member ID</label></div>
+                        <div class="col col-sm-6"><input type="text" class="form-control-sm" disabled /> <input type="button" value="Click" style="width:70px;height:32px"></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-sm-5"><label class=" form-control-label" style="width:192px;">Member Name</label></div>
+                        <div class="col col-sm-6"><input type="text" class="form-control-sm" disabled/></div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-sm-5"><label class=" form-control-label">Amount</label></div>
-                        <div class="col col-sm-6"><input type="text" class="textfield" style="width:190px;height:35px" value="" id="extra7" name="extra7" onkeypress="return isNumber(event)" /></div>
+                        <div class="col col-sm-6"><input type="text" class="form-control-sm" style="width:190px;height:35px" value="" id="extra7" name="extra7" onkeypress="return isNumber(event)" /></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-sm-5"><label class=" form-control-label">Remarks</label></div>
+                        <div class="col col-sm-6"><input type="text" class="form-control-sm" style="width:192px;"/></div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-sm-5"></div>
                         <div class="col col-sm-6">
-                           <input type="button" id="btnSave" value="Save" class="btn btn-primary" />                                                
+                            <input type="button" id="btnSave" value="Save" class="btn btn-primary" />
                             <button onclick="btnCancel_Click()" id="btnCancel" class="btn btn-danger">Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4"></div>
+        <div class="col-lg-3"></div>
     </div>
 </div>
 
@@ -66,39 +74,15 @@
                     Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
                 },
                 success: function (data) {
+                   
                     $.each(data, function (i, item) {
                         $("#Transactiontypes").append($("<option></option>").val(item.TransactionID).html(item.TransactionName));
-                    }
-                   }
-
-            })
-        });       
-        function btnSaveClick() {
-            var Tmodel = {
-                TransactionDate: $("#TransactionDate").val(),
-                TransactionType: $("#TransactionType").val(),
-                Member: $("#Member").val(),
-                Amount: $("#Amount").val(),
-            };
-            $.ajax({
-                url: '/api/TransactionApi/Insert_TransactionTypes',
-                type: 'POST',
-                dataType: 'json',
-                data: Tmodel,
-                headers:
-                {
-                    Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
+                    });
                 },
-                success: function (result) {
-
-
-                    error: function (xhr, textStatus, errorThrown) {
-                        console.log('Error in Operation');
-                    }
-                }
+                
             });
-
-        }
+        });       
+      
         function isNumber(evt) {
             evt = (evt) ? evt : window.event;
             var charCode = (evt.which) ? evt.which : evt.keyCode;
