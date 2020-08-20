@@ -14,5 +14,9 @@ namespace CKMFundFees.Controllers
         {
             return View();
         }
+
+        public ActionResult MemberList()
+        { return View();
+        }
     }
 }

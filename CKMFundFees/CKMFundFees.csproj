@@ -124,8 +124,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TransactionAPIController.cs" />
-    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\UserApiController.cs" />
     <Compile Include="Controllers\UserAuthentication.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -5450,7 +5448,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
-    <Content Include="Views\Transaction\Transaction.cshtml" />
+    <Content Include="Views\User\MemberList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -5474,10 +5472,6 @@
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{5FFD6142-1631-4FA6-ABB8-F7397B3D1027}</Project>
       <Name>Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TransactionBL\TransactionBL.csproj">
-      <Project>{6992D139-6E6E-4B83-98DE-FC9DE987EE4E}</Project>
-      <Name>TransactionBL</Name>
     </ProjectReference>
     <ProjectReference Include="..\UserBL\UserBL.csproj">
       <Project>{42FDC88C-C978-4AAD-8440-4AD3B6B25361}</Project>
