@@ -9,29 +9,33 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
+                <input type="button" value="AddNewMember" id=" btnAddClick" class="btn btn-primary" />
+            </div>
+            <div class="col-md-4">
                 <table id="tblUser" class="tb1 col-sm-12" style="padding-left:0px;">
                     <thead>
                         <tr>
                             <td>MemberID</td>
                             <td>MemberName</td>
+                            <td></td>
                         </tr>
                     </thead>
                 </table>
             </div>
-
+            <div class="col-md-2"></div>
         </div>
     </div>
 </div>
-
-
 
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
             $("#tblUser").DataTable({
+                "bFilter": false,
                 "bLengthChange": false,
                 "bInfo": false,
+                destroy: true,
                 "ajax": {
                     "url": "/api/UserApi/SP_Select_MemberList",
                     "type": "GET",
@@ -44,18 +48,23 @@
                 },
                 "columns": [
                     { "data": "MemberID" },
-                    { "data": "MemberName" }
+                    { "data": "MemberName" },
+                    { "data": "" }
                 ],
 
                 "columnDefs": [{
-                    "targets": 0,
+                    "targets": 2,
                     "data": "null",
                     "render": function (data, type, row) {
-                        return "<a href='/User/MemberEntry/" + data + "'>Edit</a>";
+                        //return "<a href='/User/MemberEntry/" + data + "'>Edit</a>";
+                        return '<label><a href="#" onClick="btnEditClick(\'' + data + '\')" style="color:blue">Edit</a></label><label><a href="#" onClick="btnDelClick(\'' + data + '\')" style="color:red">Delete</a></label>';
                     }
                 }]
             });
         });
+        function btnAddClick() {
+        location.href = '@Url.Action("UserEntry", "User")?Mode=New'
+    }
     </script>
 }
 

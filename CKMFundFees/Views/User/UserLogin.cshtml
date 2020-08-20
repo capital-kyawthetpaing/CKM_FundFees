@@ -42,7 +42,14 @@
     
     $(document).ready(function () {
         $("#txtMemberID").focus();
-            $("#btnLogin").click(function () {
+        
+        //prevent default submit
+        $("#log").submit(function (e) {
+            return false;
+        });
+
+        
+          $("#btnLogin").click(function () {
                 if (!($('#txtMemberID').val().trim() == '' || $('#txtPassword').val().trim() == '')) {
                     var Umodel = {
                         MemberID: $('#txtMemberID').val(),
