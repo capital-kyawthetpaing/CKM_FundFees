@@ -20,5 +20,16 @@ namespace UserBL
             Umodel.Sqlprms[1] = new SqlParameter("@Password", SqlDbType.VarChar) { Value = Umodel.Password };
             return bdl.SelectJson("SP_Select_Login", Umodel.Sqlprms);
         }
+
+        
+            public DataTable Sp_Select_MemberList()
+            {
+                BaseDL bdl = new BaseDL();
+                return bdl.SelectDatatable("Sp_Select_MemberList");
+            }
+
+        }
     }
-}
+
+    
+

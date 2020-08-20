@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "MemberList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>MemberList</h2>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table id="tblUser" class="tb1 col-sm-12" style="padding-left:0px;">
+                    <thead>
+                        <tr>
+                            <td>MemberID</td>
+                            <td>MemberName</td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#tblUser").DataTable({
+                "bLengthChange": false,
+                "bInfo": false,
+                "ajax": {
+                    "url": "/api/UserApi/SP_Select_MemberList",
+                    "type": "GET",
+                    "datatype": "json",
+                    dataSrc: "",
+                    headers:
+                    {
+                        Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
+                    },
+                },
+                "columns": [
+                    { "data": "MemberID" },
+                    { "data": "MemberName" }
+                ],
+
+                "columnDefs": [{
+                    "targets": 0,
+                    "data": "null",
+                    "render": function (data, type, row) {
+                        return "<a href='/User/MemberEntry/" + data + "'>Edit</a>";
+                    }
+                }]
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
