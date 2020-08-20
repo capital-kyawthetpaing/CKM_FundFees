@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "Transaction";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section styles{
+
+    <link href="~/Content/bootstrap-textbox.css" rel="stylesheet" />
+}
+<h2>Transaction</h2>
+<div class="container">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4"></div>
+    <div class="content">
+
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header card-block">
+                    <h2 style="text-align:center;">Transaction Form</h2>
+                </div>
+                <div class="card-body card-block">
+                    <div class="row form-group">
+                        <div class="col col-sm-5"><label class=" form-control-label">Transaction Date</label></div>
+                        <div class="col col-sm-6"><input type="date" style="width:192px;" class="form-control-sm" /></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-sm-5"><label class=" form-control-label">Transaction Type</label></div>
+                        <div class="col col-sm-6">
+                            @Html.DropDownList("Transactiontypes", new SelectList(Enumerable.Empty<SelectListItem>(), "id", "name"), "Select", htmlAttributes: new { @class = "control-label", })
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-sm-5"><label class=" form-control-label">Member ID</label></div>
+                        <div class="col col-sm-6"><input type="text" class="form-control-sm" disabled /> <input type="button" value="Click" style="width:70px;height:32px"></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-sm-5"><label class=" form-control-label" style="width:192px;">Member Name</label></div>
+                        <div class="col col-sm-6"><input type="text" class="form-control-sm" disabled/></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-sm-5"><label class=" form-control-label">Amount</label></div>
+                        <div class="col col-sm-6"><input type="text" class="form-control-sm" style="width:190px;height:35px" value="" id="extra7" name="extra7" onkeypress="return isNumber(event)" /></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-sm-5"><label class=" form-control-label">Remarks</label></div>
+                        <div class="col col-sm-6"><input type="text" class="form-control-sm" style="width:192px;"/></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-sm-5"></div>
+                        <div class="col col-sm-6">
+                            <input type="button" id="btnSave" value="Save" class="btn btn-primary" />
+                            <button onclick="btnCancel_Click()" id="btnCancel" class="btn btn-danger">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "/api/TransactionAPI/Select_TransactionTypes",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers:
+                {
+                    Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
+                },
+                success: function (data) {
+                   
+                    $.each(data, function (i, item) {
+                        $("#Transactiontypes").append($("<option></option>").val(item.TransactionID).html(item.TransactionName));
+                    });
+                },
+                
+            });
+        });       
+      
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
+     
+    </script>
+}
+
+
