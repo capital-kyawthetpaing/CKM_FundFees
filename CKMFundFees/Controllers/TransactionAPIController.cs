@@ -12,7 +12,6 @@ namespace CKMFundFees.Controllers
         [ActionName("Select_TransactionTypes")]
         public IHttpActionResult Select_TransactionTypes()
         {
-
             Transaction_BL Tbl = new Transaction_BL();
             DataTable dt = Tbl.Select_TransactionTypes();
             return Ok(dt);
@@ -23,8 +22,8 @@ namespace CKMFundFees.Controllers
         [ActionName("Insert_TransactionTypes")]
         public IHttpActionResult Insert_TransactionTypes([FromBody] TransactionModel Tmodel)
         {
-            Transaction_BL Ubl = new Transaction_BL();
-            return Ok(Ubl.M_Insert_TransactionTypes(Tmodel));
+            Transaction_BL Tbl = new Transaction_BL();
+            return Ok(Tbl.M_Insert_TransactionTypes(Tmodel));
         }
     }
 }
