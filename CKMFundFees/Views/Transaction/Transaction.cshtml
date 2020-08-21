@@ -9,13 +9,11 @@
 }
 <h2>Transaction</h2>
 <div class="container">
-    <div class="col-lg-4"></div>
-    <div class="col-lg-4"></div>
-    <div class="content">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header card-block">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+        <div class="content">
+            <div class="card" style="background:#e0efea">
+                <div class="card-header card-block" style="background:#29323c;color:#dac7c7">
                     <h2 style="text-align:center;">Transaction Form</h2>
                 </div>
                 <div class="card-body card-block">
@@ -31,19 +29,23 @@
                     </div>
                     <div class="row form-group">
                         <div class="col col-sm-5"><label class=" form-control-label">Member ID</label></div>
-                        <div class="col col-sm-6"><input type="text" id="txtMemberID" class="form-control-sm" disabled /> <input type="button" value="Click" style="width:70px;height:32px"></div>
+                        <div class="col col-sm-6">
+                            <input type="text" id="txtMemberID" class="form-control-sm" disabled />
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Open</button>
+                        </div>
                     </div>
+
                     <div class="row form-group">
-                        <div class="col col-sm-5"><label class=" form-control-label" style="width:192px;">Member Name</label></div>
+                        <div class="col col-sm-5"><label class=" form-control-label">Member Name</label></div>
                         <div class="col col-sm-6"><input type="text" id="txtMemberName" class="form-control-sm" disabled /></div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-sm-5"><label class=" form-control-label">Amount</label></div>
-                        <div class="col col-sm-6"><input type="text" id="txtAmount" name="extra7" onkeypress="return isNumber(event)" class="form-control-sm" style="width:190px;height:35px" /></div>
+                        <div class="col col-sm-6"><input type="text" id="txtAmount" name="extra7" onkeypress="return isNumber(event)" class="form-control-sm" /></div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-sm-5"><label class=" form-control-label">Remarks</label></div>
-                        <div class="col col-sm-6"><input type="text" id="txtRemark" class="form-control-sm" style="width:192px;" /></div>
+                        <div class="col col-sm-6"><textarea id="txtRemark" class="form-control-l"></textarea></div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-sm-5"></div>
@@ -55,24 +57,42 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3"></div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Select Member</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
     </div>
 </div>
-
 @section Scripts
 {
     <script type="text/javascript">
 
         $(document).ready(function () {
             $("#btnSave").click(function () {
-                alert("go");
                 var Tmodel = {
                     TransactionDate: $('#txtTransactionDate').val(),
                     TrnasactionType: $('#Transactiontypes').val(),
                     MemberID: $('#txtMemberID').val(),
                     MemberName: $('#txtMemberName').val(),
                     Amount: $('#txtAmount').val(),
-                    Remark: $('#txtRemark').val()
+                    Remarks: $('#txtRemark').val()
                 }
 
                 $.ajax({
@@ -91,6 +111,14 @@
                         console.log('Error in Operation');
                     }
                 })
+            });
+            $("#btnCancel").click(function () {
+                $('#txtTransactionDate').val("");
+                $('#Transactiontypes').val("");
+                $('#txtMemberID').val("");
+                $('#txtMemberName').val("");
+                $('#txtAmount').val("");
+                $('#txtRemark').val("");
             });
             $.ajax({
                 type: "GET",
@@ -122,5 +150,4 @@
         }
     </script>
 }
-
 

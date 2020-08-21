@@ -31,5 +31,10 @@ namespace TransactionBL
             Tmodel.Sqlprms[5] = new SqlParameter("@Remarks", SqlDbType.VarChar) { Value = Tmodel.Remarks };
             return bdl.InsertUpdateDeleteData("M_Insert_TransactionTypes", Tmodel.Sqlprms);
         }
+        public DataTable SP_Select_TransactionList()
+        {
+            BaseDL bdl = new BaseDL();
+            return bdl.SelectDatatable("SP_Select_TransactionList");
+        }
     }
 }
