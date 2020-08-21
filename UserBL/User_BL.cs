@@ -28,7 +28,19 @@ namespace UserBL
                 return bdl.SelectDatatable("Sp_Select_MemberList");
             }
 
+        public string SP_Insert_MemberEntry(UserModel Umodel)
+        {
+            BaseDL bdl = new BaseDL();
+            Umodel.Sqlprms = new SqlParameter[3];
+            Umodel.Sqlprms[0] = new SqlParameter("@MemberID", SqlDbType.VarChar) { Value = Umodel.MemberID };
+            Umodel.Sqlprms[1] = new SqlParameter("@MemberName", SqlDbType.VarChar) { Value = Umodel.MemberName};
+            Umodel.Sqlprms[2] = new SqlParameter("@Password", SqlDbType.VarChar) { Value = Umodel.Password};
+            Umodel.Sqlprms[3] = new SqlParameter("@PhoneNo", SqlDbType.VarChar) { Value = Umodel.PhoneNo };
+            Umodel.Sqlprms[4] = new SqlParameter("@JoinDate", SqlDbType.Date) { Value = Umodel.JoinDate };
+            return bdl.InsertUpdateDeleteData("SP_Insert_MemberEntry", Umodel.Sqlprms);
         }
+
+    }
     }
 
     

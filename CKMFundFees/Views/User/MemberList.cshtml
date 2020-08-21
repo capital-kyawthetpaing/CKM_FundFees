@@ -9,15 +9,17 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-4">
-                <input type="button" value="AddNewMember" id=" btnAddClick" class="btn btn-primary" />
+            <div class="col-md-2">
+                <input type="button" value="AddNewMember" id=" btnAddClick" class="btn btn-primary" onclick="btnAddClick();" />
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <table id="tblUser" class="tb1 col-sm-12" style="padding-left:0px;">
                     <thead>
                         <tr>
                             <td>MemberID</td>
                             <td>MemberName</td>
+                            <td>PhoneNo</td>
+                            <td>JoinDate</td>
                             <td></td>
                         </tr>
                     </thead>
@@ -49,11 +51,13 @@
                 "columns": [
                     { "data": "MemberID" },
                     { "data": "MemberName" },
+                    { "data": "PhoneNo" },
+                    { "data": "JoinDate" },
                     { "data": "" }
                 ],
 
                 "columnDefs": [{
-                    "targets": 2,
+                    "targets": 4,
                     "data": "null",
                     "render": function (data, type, row) {
                         //return "<a href='/User/MemberEntry/" + data + "'>Edit</a>";
@@ -63,10 +67,21 @@
             });
         });
         function btnAddClick() {
-        location.href = '@Url.Action("UserEntry", "User")?Mode=New'
-    }
+        location.href = '@Url.Action("MemberEntry", "User")?Mode=New'
+        }
+        function btnEditClick(MemberID) {
+        location.href = '@Url.Action("MemberEntry", "User")?MemberID='+MemberID+'&Mode=Edit';
+        }
+        function btnDelClick(MemberID) {
+            location.href = '@Url.Action("MemberEntry", "User")?MemberEntry=' + MemberEntry+'&Mode=Delete';
+        }
     </script>
 }
+
+
+
+
+
 
 
 

@@ -43,6 +43,15 @@ namespace CKMFundFees.Controllers
             //return Ubl.Sp_Select_MemberList();
         }
 
+        [UserAuthentication]
+        [HttpPost]
+        [ActionName("SP_Insert_MemberEntry")]
+        public IHttpActionResult SP_Insert_MemberEntry([FromBody] UserModel Umodel)
+        {
+            User_BL Tbl = new User_BL();
+            return Ok(Tbl.SP_Insert_MemberEntry(Umodel));
+        }
+
 
     }
 }
