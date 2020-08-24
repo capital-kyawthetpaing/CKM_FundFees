@@ -11,6 +11,7 @@ namespace Models
     {
         public class TransactionModel : BaseModel
         {
+            public string TransactionID { get; set; }
             public string TransactionDate { get; set; }
             public string TransactionType { get; set; }
             public string MemberID { get; set; }

@@ -9,16 +9,18 @@
 }
 <h2>Transaction</h2>
 <div class="container">
-    <div class="col-lg-4"></div>
-    <div class="col-lg-4"></div>
-    <div class="content">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header card-block">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+        <div class="content">
+            <div class="card" style="background:#e0efea">
+                <div class="card-header card-block" style="background:#29323c;color:#dac7c7">
                     <h2 style="text-align:center;">Transaction Form</h2>
                 </div>
                 <div class="card-body card-block">
+                    <div class="row form-group">
+                        <div class="col col-sm-5"><label class=" form-control-label">TransactionID</label></div>
+                        <div class="col col-sm-6"><input type="text" id="txtTransactionID" style="width:192px;" class="form-control-sm" /></div>
+                    </div>
                     <div class="row form-group">
                         <div class="col col-sm-5"><label class=" form-control-label">Transaction Date</label></div>
                         <div class="col col-sm-6"><input type="date" id="txtTransactionDate" style="width:192px;" class="form-control-sm" /></div>
@@ -26,24 +28,28 @@
                     <div class="row form-group">
                         <div class="col col-sm-5"><label class=" form-control-label">Transaction Type</label></div>
                         <div class="col col-sm-6">
-                            @Html.DropDownList("Transactiontypes", new SelectList(Enumerable.Empty<SelectListItem>(), "id", "name"), "Select", htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownList("Transactiontypes", new SelectList(Enumerable.Empty<SelectListItem>(), "id", "name"), "Select", new { @class = "control-label", @id = "dropTransaction" })
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-sm-5"><label class=" form-control-label">Member ID</label></div>
-                        <div class="col col-sm-6"><input type="text" id="txtMemberID" class="form-control-sm" disabled /> <input type="button" value="Click" style="width:70px;height:32px"></div>
+                        <div class="col col-sm-6">
+                            <input type="text" id="txtMemberID" class="form-control-sm" />
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Open</button>
+                        </div>
                     </div>
+
                     <div class="row form-group">
-                        <div class="col col-sm-5"><label class=" form-control-label" style="width:192px;">Member Name</label></div>
+                        <div class="col col-sm-5"><label class=" form-control-label">Member Name</label></div>
                         <div class="col col-sm-6"><input type="text" id="txtMemberName" class="form-control-sm" disabled /></div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-sm-5"><label class=" form-control-label">Amount</label></div>
-                        <div class="col col-sm-6"><input type="text" id="txtAmount" name="extra7" onkeypress="return isNumber(event)" class="form-control-sm" style="width:190px;height:35px" /></div>
+                        <div class="col col-sm-6"><input type="text" id="txtAmount" name="extra7" onkeypress="return isNumber(event)" class="form-control-sm" /></div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-sm-5"><label class=" form-control-label">Remarks</label></div>
-                        <div class="col col-sm-6"><input type="text" id="txtRemark" class="form-control-sm" style="width:192px;" /></div>
+                        <div class="col col-sm-6"><textarea id="txtRemark" class="form-control-l"></textarea></div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-sm-5"></div>
@@ -55,72 +61,114 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3"></div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Select Member</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
     </div>
 </div>
-
 @section Scripts
 {
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            $("#btnSave").click(function () {
-                alert("go");
-                var Tmodel = {
-                    TransactionDate: $('#txtTransactionDate').val(),
-                    TrnasactionType: $('#Transactiontypes').val(),
-                    MemberID: $('#txtMemberID').val(),
-                    MemberName: $('#txtMemberName').val(),
-                    Amount: $('#txtAmount').val(),
-                    Remark: $('#txtRemark').val()
-                }
+$(document).ready(function () {
+$("#btnSave").click(function () {
+var Tmodel = {
+TransactionID: $('#txtTransactionID').val(),
+TransactionDate: $('#txtTransactionDate').val(),
+TransactionType: $('#dropTransaction').val(),
+MemberID: $('#txtMemberID').val(),
+MemberName: $('#txtMemberName').val(),
+Amount: $('#txtAmount').val(),
+Remarks: $('#txtRemark').val()
+}
 
-                $.ajax({
-                    url: '/api/TransactionAPI/Insert_TransactionTypes',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: Tmodel,
-                    headers:
-                    {
-                        Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
-                    },
-                    success: function (result) {
+$.ajax({
+url: '/api/TransactionAPI/Insert_TransactionTypes',
+type: 'POST',
+dataType: 'json',
+data: Tmodel,
+headers:
+{
+Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
+},
+success: function (data) {
+var userdata = JSON.parse(data);
+if (userdata.length < 0) {
+alert("Data Save successfully.")
+location.href = '@Url.Action("TransactionList", "Transaction")';
+}
+else {
+alert("The data can not be save!")
+$('#txtTransactionID').val("");
+$('#txtTransactionDate').val("");
+$('#dropTransaction').val;
+$('#txtMemberID').val("");
+$('#txtMemberName').val("");
+$('#txtAmount').val("");
+$('#txtRemark').val("");         
+}
+},
+error: function (xhr, textStatus, errorThrown) {
+console.log('Error in Operation');
+}
+})
+});
+$("#btnCancel").click(function () {
+$('#txtTransactionID').val("");
+$('#txtTransactionDate').val("");
+$('#dropTransaction').val("");
+$('#txtMemberID').val("");
+$('#txtMemberName').val("");
+$('#txtAmount').val("");
+$('#txtRemark').val("");
+});
+$.ajax({
+type: "GET",
+url: "/api/TransactionAPI/Select_TransactionTypes",
+contentType: "application/json; charset=utf-8",
+dataType: "json",
+headers:
+{
+Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
+},
+success: function (data) {
 
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        console.log('Error in Operation');
-                    }
-                })
-            });
-            $.ajax({
-                type: "GET",
-                url: "/api/TransactionAPI/Select_TransactionTypes",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                headers:
-                {
-                    Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
-                },
-                success: function (data) {
+$.each(data, function (i, item) {
+$("#dropTransaction").append($("<option></option>").val(item.TransactionTypeID).html(item.TransactionName));
 
-                    $.each(data, function (i, item) {
-                        $("#Transactiontypes").append($("<option></option>").val(item.TransactionID).html(item.TransactionName));
+})
+}
 
-                    })
-                }
+});
 
-            });
-
-        });
-        function isNumber(evt) {
-            evt = (evt) ? evt : window.event;
-            var charCode = (evt.which) ? evt.which : evt.keyCode;
-            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-                return false;
-            }
-            return true;
-        }
-    </script>
+});
+function isNumber(evt) {
+evt = (evt) ? evt : window.event;
+var charCode = (evt.which) ? evt.which : evt.keyCode;
+if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+return false;
+}
+return true;
 }
 
 
+    </script>
+}

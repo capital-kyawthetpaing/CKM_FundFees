@@ -1,4 +1,5 @@
 ﻿
+
 @{
     ViewBag.Title = "TransactionList";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,7 +10,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-3">
-                <input type="button" value="AddNewTransaction" class="btn btn-primary" />
+                <input type="button" onclick="btnAddClick()" id="btnAddClick" value="AddNewTransaction"  class="btn btn-primary" />
             </div>
             <div class="col-md-6">
                 <table id="tbl" class="tb1 col-sm-12" style="padding-left:0px;">
@@ -69,8 +70,15 @@
                 }]
             });
         });
+        function btnAddClick() {
+           location.href = '@Url.Action("Transaction", "Transaction")?Mode=New'
+        }
     </script>
 }
+
+
+
+
 
 
 
