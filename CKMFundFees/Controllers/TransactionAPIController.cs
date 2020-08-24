@@ -22,12 +22,17 @@ namespace CKMFundFees.Controllers
         [ActionName("Insert_TransactionTypes")]
         public IHttpActionResult Insert_TransactionTypes([FromBody] TransactionModel Tmodel)
         {
+            if (Tmodel == null)
+            {
+                throw new System.ArgumentNullException(nameof(Tmodel));
+            }
+
             Transaction_BL Tbl = new Transaction_BL();
             return Ok(Tbl.M_Insert_TransactionTypes(Tmodel));
         }
         [UserAuthentication]
         [HttpGet]
-        [ActionName("Sp_Select_TransactionList")]
+        [ActionName("SP_Select_TransactionList")]
         public IHttpActionResult SP_Select_TransactionList()
         {
 

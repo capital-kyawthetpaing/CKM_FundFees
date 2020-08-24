@@ -18,19 +18,23 @@
                 </div>
                 <div class="card-body card-block">
                     <div class="row form-group">
+                        <div class="col col-sm-5"><label class=" form-control-label">TransactionID</label></div>
+                        <div class="col col-sm-6"><input type="text" id="txtTransactionID" style="width:192px;" class="form-control-sm" /></div>
+                    </div>
+                    <div class="row form-group">
                         <div class="col col-sm-5"><label class=" form-control-label">Transaction Date</label></div>
                         <div class="col col-sm-6"><input type="date" id="txtTransactionDate" style="width:192px;" class="form-control-sm" /></div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-sm-5"><label class=" form-control-label">Transaction Type</label></div>
                         <div class="col col-sm-6">
-                            @Html.DropDownList("Transactiontypes", new SelectList(Enumerable.Empty<SelectListItem>(), "id", "name"), "Select", htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownList("Transactiontypes", new SelectList(Enumerable.Empty<SelectListItem>(), "id", "name"), "Select", new { @class = "control-label", @id = "dropTransaction" })
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-sm-5"><label class=" form-control-label">Member ID</label></div>
                         <div class="col col-sm-6">
-                            <input type="text" id="txtMemberID" class="form-control-sm" disabled />
+                            <input type="text" id="txtMemberID" class="form-control-sm" />
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Open</button>
                         </div>
                     </div>
@@ -71,7 +75,7 @@
                 <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
             <div class="modal-body">
-                <p>Some text in the modal.</p>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -84,70 +88,87 @@
 {
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            $("#btnSave").click(function () {
-                var Tmodel = {
-                    TransactionDate: $('#txtTransactionDate').val(),
-                    TrnasactionType: $('#Transactiontypes').val(),
-                    MemberID: $('#txtMemberID').val(),
-                    MemberName: $('#txtMemberName').val(),
-                    Amount: $('#txtAmount').val(),
-                    Remarks: $('#txtRemark').val()
-                }
-
-                $.ajax({
-                    url: '/api/TransactionAPI/Insert_TransactionTypes',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: Tmodel,
-                    headers:
-                    {
-                        Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
-                    },
-                    success: function (result) {
-
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        console.log('Error in Operation');
-                    }
-                })
-            });
-            $("#btnCancel").click(function () {
-                $('#txtTransactionDate').val("");
-                $('#Transactiontypes').val("");
-                $('#txtMemberID').val("");
-                $('#txtMemberName').val("");
-                $('#txtAmount').val("");
-                $('#txtRemark').val("");
-            });
-            $.ajax({
-                type: "GET",
-                url: "/api/TransactionAPI/Select_TransactionTypes",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                headers:
-                {
-                    Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
-                },
-                success: function (data) {
-
-                    $.each(data, function (i, item) {
-                        $("#Transactiontypes").append($("<option></option>").val(item.TransactionID).html(item.TransactionName));
-
-                    })
-                }
-
-            });
-
-        });
-        function isNumber(evt) {
-            evt = (evt) ? evt : window.event;
-            var charCode = (evt.which) ? evt.which : evt.keyCode;
-            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-                return false;
-            }
-            return true;
-        }
-    </script>
+$(document).ready(function () {
+$("#btnSave").click(function () {
+var Tmodel = {
+TransactionID: $('#txtTransactionID').val(),
+TransactionDate: $('#txtTransactionDate').val(),
+TransactionType: $('#dropTransaction').val(),
+MemberID: $('#txtMemberID').val(),
+MemberName: $('#txtMemberName').val(),
+Amount: $('#txtAmount').val(),
+Remarks: $('#txtRemark').val()
 }
 
+$.ajax({
+url: '/api/TransactionAPI/Insert_TransactionTypes',
+type: 'POST',
+dataType: 'json',
+data: Tmodel,
+headers:
+{
+Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
+},
+success: function (data) {
+var userdata = JSON.parse(data);
+if (userdata.length < 0) {
+alert("Data Save successfully.")
+location.href = '@Url.Action("TransactionList", "Transaction")';
+}
+else {
+alert("The data can not be save!")
+$('#txtTransactionID').val("");
+$('#txtTransactionDate').val("");
+$('#dropTransaction').val;
+$('#txtMemberID').val("");
+$('#txtMemberName').val("");
+$('#txtAmount').val("");
+$('#txtRemark').val("");
+}
+},
+error: function (xhr, textStatus, errorThrown) {
+console.log('Error in Operation');
+}
+})
+});
+$("#btnCancel").click(function () {
+$('#txtTransactionID').val("");
+$('#txtTransactionDate').val("");
+$('#dropTransaction').val("");
+$('#txtMemberID').val("");
+$('#txtMemberName').val("");
+$('#txtAmount').val("");
+$('#txtRemark').val("");
+});
+$.ajax({
+type: "GET",
+url: "/api/TransactionAPI/Select_TransactionTypes",
+contentType: "application/json; charset=utf-8",
+dataType: "json",
+headers:
+{
+Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
+},
+success: function (data) {
+
+$.each(data, function (i, item) {
+$("#dropTransaction").append($("<option></option>").val(item.TransactionTypeID).html(item.TransactionName));
+
+})
+}
+
+});
+
+});
+function isNumber(evt) {
+evt = (evt) ? evt : window.event;
+var charCode = (evt.which) ? evt.which : evt.keyCode;
+if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+return false;
+}
+return true;
+}
+
+
+    </script>
+}
