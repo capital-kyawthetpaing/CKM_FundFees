@@ -11,5 +11,7 @@ namespace Models
         public string MemberID { get; set; }
         public String MemberName { get; set; }
         public String Password { get; set; }
+        public String PhoneNo { get; set; }
+        public String JoinDate { get; set; }
     }
 }
