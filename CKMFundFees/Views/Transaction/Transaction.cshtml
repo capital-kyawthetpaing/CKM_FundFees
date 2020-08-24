@@ -100,30 +100,30 @@ Amount: $('#txtAmount').val(),
 Remarks: $('#txtRemark').val()
 }
 
-$.ajax({
-url: '/api/TransactionAPI/Insert_TransactionTypes',
-type: 'POST',
-dataType: 'json',
-data: Tmodel,
-headers:
-{
-Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
-},
-success: function (data) {
-var userdata = JSON.parse(data);
-if (userdata.length <0) {
+    $.ajax({
+        url: '/api/TransactionAPI/Insert_TransactionTypes',
+        type: 'POST',
+        dataType: 'json',
+        data: Tmodel,
+        headers:
+        {
+            Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
+        },
+        success: function (data) {
+            var userdata = JSON.parse(data);
+            if (userdata.length < 0){
 alert("Data Save successfully.")
 location.href = '@Url.Action("TransactionList", "Transaction")';
 }
 else {
-alert("The data can not save!")
-$('#txtTransactionID').val("");
-$('#txtTransactionDate').val("");
-$('#dropTransaction').val;
-$('#txtMemberID').val("");
-$('#txtMemberName').val("");
-$('#txtAmount').val("");
-$('#txtRemark').val("");         
+    alert("The data can not save successfully!") 
+    $('#txtTransactionID').val("");
+    $('#txtTransactionDate').val("");
+    $('#dropTransaction').val;
+    $('#txtMemberID').val("");
+    $('#txtMemberName').val("");
+    $('#txtAmount').val("");
+    $('#txtRemark').val("");
 }
 },
 error: function (xhr, textStatus, errorThrown) {
