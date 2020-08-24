@@ -111,12 +111,12 @@ Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
 },
 success: function (data) {
 var userdata = JSON.parse(data);
-if (userdata.length < 0) {
+if (userdata.length <0) {
 alert("Data Save successfully.")
 location.href = '@Url.Action("TransactionList", "Transaction")';
 }
 else {
-alert("The data can not be save!")
+alert("The data can not save!")
 $('#txtTransactionID').val("");
 $('#txtTransactionDate').val("");
 $('#dropTransaction').val;
