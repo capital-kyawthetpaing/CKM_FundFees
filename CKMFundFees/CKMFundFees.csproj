@@ -5453,6 +5453,7 @@
     <Content Include="Views\User\MemberList.cshtml" />
     <Content Include="Views\Transaction\Transaction.cshtml" />
     <Content Include="Views\User\MemberEntry.cshtml" />
+    <Content Include="Views\Transaction\TransactionList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

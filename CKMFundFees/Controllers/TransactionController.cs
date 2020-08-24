@@ -13,6 +13,11 @@ namespace CKMFundFees.Controllers
         {
             return View();
         }
-        
+
+        public ActionResult TransactionList()
+        {
+            return View();
+        }
+
     }
 }
