@@ -9,14 +9,13 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-3">
-                <input type="button" onclick="btnAddClick()" id="btnAddClick" value="AddNewTransaction"  class="btn btn-primary" />
+            <div class="col-md-2">
+                <input type="button" value="AddNewTransaction" id=" btnAddClick" class="btn btn-primary" onclick="btnAddClick();" />
             </div>
-            <div class="col-md-6">
-                <table id="tbl" class="tb1 col-sm-12" style="padding-left:0px;">
+            <div class="col-md-8">
+                <table id="tblTransaction" class="tb1 col-sm-12" style="padding-left:0px;">
                     <thead>
                         <tr>
-
                             <td>MemberName</td>
                             <td>TransactionDate</td>
                             <td>TransactionID</td>
@@ -27,52 +26,56 @@
                     </thead>
                 </table>
             </div>
-            <div class="col-md-3"></div>
+            <div class="col-md-2"></div>
         </div>
     </div>
 </div>
 
 @section Scripts{
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#tbl").DataTable({
-                "bFilter": false,
-                "bLengthChange": false,
-                "bInfo": false,
-                destroy: true,
-                "ajax": {
-                    "url": "/api/TransactionAPI/SP_Select_TransactionList",
-                    "type": "GET",
-                    "datatype": "json",
-                    dataSrc: "",
-                    headers:
-                    {
-                        Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
-                    },
+    $(document).ready(function () {
+        $("#tblTransaction").DataTable({
+            "bFilter": false,
+            "bLengthChange": false,
+            "bInfo": false,
+            destroy: true,
+            "ajax": {
+                "url": "/api/TransactionAPI/SP_Select_TransactionList",
+                "type": "POST",
+                "datatype": "json",
+                dataSrc: "",
+                headers:
+                {
+                    Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
                 },
-                "columns": [
+            },
+            "columns": [
+                { "data": "MemberName" },
+                { "data": "TransactionDate" },
+                { "data": "TransactionID" },
+                { "data": "Amount" },
+                { "data": "Remark" },
+                { "data": "" },
+            ],
 
-                    { "data": "MemberName" },
-                    { "data": "TransactionDate" },
-                    { "data": "TransactionID" },
-                    { "data": "Amount" },
-                    { "data": "Remark" },
-                    { "data": "" },
-                ],
-
-                "columnDefs": [{
-                    "targets": 5,
-                    "data": "null",
-                    "render": function (data, type, row) {
-                        //return "<a href='/User/MemberEntry/" + data + "'>Edit</a>";
-                        return '<label><a href="#" onClick="btnEditClick(\'' + data + '\')" style="color:blue">Edit</a></label><label><a href="#" onClick="btnDelClick(\'' + data + '\')" style="color:red">Delete</a></label>';
-                    }
-                }]
-            });
+            "columnDefs": [{
+                "targets": 5,
+                "data": "null",
+                "render": function (data, type, row) {
+                    return '<label><a href="#" onClick="btnEditClick(\'' + row.TransactionID + '\')" style="color:blue">Edit</a></label><label><a href="#" onClick="btnDelClick(\'' + row.TransactionID + '\')" style="color:red">Delete</a></label>';
+                }
+            }]
         });
-        function btnAddClick() {
-           location.href = '@Url.Action("Transaction", "Transaction")?Mode=New'
-        }
+    });
+    function btnAddClick() {
+        location.href = '@Url.Action("Transaction", "Transaction")?Mode=New'
+    }
+    function btnEditClick(TransactionID) {
+        location.href = '@Url.Action("Transaction", "Transaction")?TransactionID=' + TransactionID + '&Mode=Edit';
+    }
+    function btnDelClick(TransactionID) {
+        location.href = '@Url.Action("Transaction", "Transaction")?TransactionID=' + TransactionID + '&Mode=Delete';
+    }
     </script>
 }
 

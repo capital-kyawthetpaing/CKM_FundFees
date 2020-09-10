@@ -1,4 +1,4 @@
-﻿using Models.CKMFundFees.Models;
+﻿using Models;
 using System.Data;
 using System.Web.Http;
 using TransactionBL;
@@ -8,7 +8,7 @@ namespace CKMFundFees.Controllers
     public class TransactionAPIController : ApiController
     {
         [UserAuthentication]
-        [HttpGet]
+        [HttpPost]
         [ActionName("Select_TransactionTypes")]
         public IHttpActionResult Select_TransactionTypes()
         {
@@ -17,21 +17,17 @@ namespace CKMFundFees.Controllers
             return Ok(dt);
             //return Ubl.M_Brand_Select();
         }
+        
         [UserAuthentication]
         [HttpPost]
-        [ActionName("Insert_TransactionTypes")]
-        public IHttpActionResult Insert_TransactionTypes([FromBody] TransactionModel Tmodel)
+        public string Transaction_CUD([FromBody] TransactionModel Tmodel)
         {
-            if (Tmodel == null)
-            {
-                throw new System.ArgumentNullException(nameof(Tmodel));
-            }
-
             Transaction_BL Tbl = new Transaction_BL();
-            return Ok(Tbl.M_Insert_TransactionTypes(Tmodel));
+            return Tbl.Transaction_CUD(Tmodel);
         }
+
         [UserAuthentication]
-        [HttpGet]
+        [HttpPost]
         [ActionName("SP_Select_TransactionList")]
         public IHttpActionResult SP_Select_TransactionList()
         {
@@ -39,7 +35,6 @@ namespace CKMFundFees.Controllers
             Transaction_BL Tbl = new Transaction_BL();
             DataTable dt = Tbl.SP_Select_TransactionList();
             return Ok(dt);
-            //return Ubl.Sp_Select_MemberList();
         }
     }
 }

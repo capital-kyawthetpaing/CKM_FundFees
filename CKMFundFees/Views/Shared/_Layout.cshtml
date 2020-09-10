@@ -8,18 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CKM Fund's Fees! |</title>
 
-
-   
-
-
     <!-- Bootstrap -->
-    @*<link href="@Url.Content("~/vendors/bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet">*@
+    <link href="@Url.Content("~/vendors/bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet" />
     <!-- Font Awesome -->
-    @*<link href="@Url.Content("~/vendors/font-awesome/css/font-awesome.min.css")" rel="stylesheet">
-        <!-- NProgress -->
-        <link href="@Url.Content("~/vendors/nprogress/nprogress.css")" rel="stylesheet">
-        <!-- Custom Theme Style -->
-        <link href="@Url.Content("~/build/css/custom.min.css")" rel="stylesheet">*@
+    <link href="@Url.Content("~/vendors/font-awesome/css/font-awesome.min.css")" rel="stylesheet" />
+    <!-- NProgress -->
+    <link href="@Url.Content("~/vendors/nprogress/nprogress.css")" rel="stylesheet" />
+    <!-- Custom Theme Style -->
+    <link href="@Url.Content("~/build/css/custom.min.css")" rel="stylesheet" />
+    <!-- FullCalendar -->
+    <link href="@Url.Content("~/vendors/fullcalendar/dist/fullcalendar.min.css")" rel="stylesheet"  />
+    <link href="@Url.Content("~/vendors/fullcalendar/dist/fullcalendar.print.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/vendors/DataTables/DataTables-1.10.21/css/dataTables.bootstrap.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/vendors/DataTables/DataTables-1.10.21/css/jquery.dataTables.min.css")" rel="stylesheet" />
 </head>
 <body class="nav-md">
     <div class="container body">
@@ -33,30 +34,38 @@
                         </a>
                     </div>
                     <div class="clearfix"></div>
-                    <!-- menu profile quick info -->
-                    @*<div class="profile clearfix">
-                            <div class="profile_info">
-                                <span>Welcome,</span>
-                                <h2>Nyi Nyi Soe</h2>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>*@
-                    <!-- /menu profile quick info -->
+
                     <br />
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
-                            <h3>General</h3>
+                            <h3>Home</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-user"></i> User <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="index.html">Dashboard</a></li>
-                                        @*<li><a href="index2.html">Dashboard2</a></li>
-                                            <li><a href="index3.html">Dashboard3</a></li>*@
+                                        <li><a href="~/User/MemberEntry">UserEntry</a></li>
+                                        <li><a href="~/User/MemberList">UserList</a></li>
                                     </ul>
                                 </li>
-
+                            </ul>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a><i class="fa fa-money"></i> Transaction<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="~/Transaction/Transaction">TransactionEntry</a></li>
+                                        <li><a href="~/Transaction/TransactionList">TransactionList</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a><i class="fa fa-money"></i> MatchDetailsInfo<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="~/MatchDetail/MatchDetails">MatchDetailEntry</a></li>
+                                        @*<li><a href="~/Transaction/TransactionList">Ma</a></li>*@
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
 
@@ -73,7 +82,7 @@
                         <a data-toggle="tooltip" data-placement="top" title="Lock">
                             <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="~/User/UserLogin">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
                     </div>
@@ -119,11 +128,6 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="dropdown-item">
-                                            @*<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                                                <span>
-                                                    <span>John Smith</span>
-                                                    <span class="time">3 mins ago</span>
-                                                </span>*@
                                             <span class="message">
                                                 Film festivals used to be do-or-die moments for movie makers. They were where...
                                             </span>
@@ -131,11 +135,6 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="dropdown-item">
-                                            @*<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                                                <span>
-                                                    <span>John Smith</span>
-                                                    <span class="time">3 mins ago</span>
-                                                </span>*@
                                             <span class="message">
                                                 Film festivals used to be do-or-die moments for movie makers. They were where...
                                             </span>
@@ -143,11 +142,6 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="dropdown-item">
-                                            @*<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                                                <span>
-                                                    <span>John Smith</span>
-                                                    <span class="time">3 mins ago</span>
-                                                </span>*@
                                             <span class="message">
                                                 Film festivals used to be do-or-die moments for movie makers. They were where...
                                             </span>
@@ -172,9 +166,8 @@
             <div class="right_col" role="main">
                 <div class="">
                     @RenderBody()
-
+                    <input type="hidden" id="MessageURL" value="@Url.Action("M_Message_Select", "api/MessageApi")" />
                     @Styles.Render("~/Content/css")
-
                     @Scripts.Render("~/bundles/bootstrap")
                 </div>
             </div>
@@ -189,19 +182,23 @@
             <!-- /footer content -->
         </div>
     </div>
-    @*<!-- jQuery -->
+    <!-- jQuery -->
         <script src="@Url.Content("~/vendors/jquery/dist/jquery.min.js")"></script>
+        <script src="@Url.Content("~/vendors/DataTables/DataTables-1.10.21/js/jquery.dataTables.min.js")"></script>
+        <script src="@Url.Content("~/vendors/DataTables/DataTables-1.10.21/js/dataTables.bootstrap.min.js")"></script>
         <!-- Bootstrap -->
         <script src="@Url.Content("~/vendors/bootstrap/dist/js/bootstrap.bundle.min.js")"></script>
         <!-- FastClick -->
         <script src="@Url.Content("~/vendors/fastclick/lib/fastclick.js")"></script>
         <!-- NProgress -->
         <script src="@Url.Content("~/vendors/nprogress/nprogress.js")"></script>
-
         <!-- Custom Theme Scripts -->
-        <script src="@Url.Content("~/build/js/custom.min.js")"></script>*@
+        <script src="@Url.Content("~/build/js/custom.min.js")"></script>
 
-
+    <!-- FullCalendar -->
+    <script src="@Url.Content("~/vendors/moment/min/moment.min.js")"></script>
+    <script src="@Url.Content("~/vendors/fullcalendar/dist/fullcalendar.min.js")"></script>
+    <script src="@Url.Content("~/Football/js/Common.js")"></script>
     @RenderSection("scripts", required: false)
     @RenderSection("styles", required: false)
 </body>

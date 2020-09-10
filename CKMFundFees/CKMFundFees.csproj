@@ -124,6 +124,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MatchDetailController.cs" />
+    <Compile Include="Controllers\MessageApiController.cs" />
     <Compile Include="Controllers\TransactionAPIController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Controllers\UserApiController.cs" />
@@ -168,6 +170,7 @@
     <Content Include="Football\images\welcome.png" />
     <Content Include="Football\images\welcome.tiff" />
     <Content Include="Football\js\bootstrap.min.js" />
+    <Content Include="Football\js\common.js" />
     <Content Include="Football\js\jquery.min.js" />
     <Content Include="Football\js\shBrushXml.js" />
     <Content Include="Football\js\shCore.js" />
@@ -386,6 +389,7 @@
     <Content Include="Scripts\src\modifiers\offset.js" />
     <Content Include="Scripts\src\modifiers\preventOverflow.js" />
     <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\SweetAlert2.js" />
     <Content Include="Scripts\src\utils\clockwise.js" />
     <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
     <Content Include="Scripts\src\utils\debounce.js" />
@@ -5454,6 +5458,7 @@
     <Content Include="Views\Transaction\Transaction.cshtml" />
     <Content Include="Views\User\MemberEntry.cshtml" />
     <Content Include="Views\Transaction\TransactionList.cshtml" />
+    <Content Include="Views\MatchDetail\MatchDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -5474,8 +5479,12 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MessageBL\MessageBL.csproj">
+      <Project>{4892A60A-B2EA-43EA-AEF5-1CB3230043B5}</Project>
+      <Name>MessageBL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{5FFD6142-1631-4FA6-ABB8-F7397B3D1027}</Project>
+      <Project>{5ffd6142-1631-4fa6-abb8-f7397b3d1027}</Project>
       <Name>Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\TransactionBL\TransactionBL.csproj">
