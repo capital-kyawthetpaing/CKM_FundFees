@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,9 +10,11 @@ namespace CKMFundFees.Controllers
     public class TransactionController : Controller
     {
         // GET: Transaction
-        public ActionResult Transaction()
+        public ActionResult Transaction(TransactionModel Tmodel)
         {
-            return View();
+            if (string.IsNullOrWhiteSpace(Tmodel.Mode))
+                Tmodel.Mode = "New";
+            return View(Tmodel);
         }
 
         public ActionResult TransactionList()

@@ -20,25 +20,33 @@ namespace CKMFundFees
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                     "~/vendors/jquery/dist/jquery.min.js",
-                     "~/Scripts/bootstrap.js",
-                     "~/vendors/bootstrap/dist/js/bootstrap.bundle.min.js",
-                     "~/vendors/nprogress/nprogress.js",
-                     "~/vendors/fastclick/lib/fastclick.js",
-                     "~/build/js/custom.min.js",
-                     "~/vendors/DataTables/DataTables-1.10.21/js/jquery.dataTables.min.js",
-                     "~/vendors/DataTables/DataTables-1.10.21/js/dataTables.bootstrap.min.js"
+                     //"~/vendors/jquery/dist/jquery.min.js",
+                     //"~/Scripts/bootstrap.js",
+                     //"~/vendors/bootstrap/dist/js/bootstrap.bundle.min.js",
+                     //"~/vendors/nprogress/nprogress.js",
+                     //"~/vendors/fastclick/lib/fastclick.js",
+                     //"~/build/js/custom.min.js",
+                     //"~/vendors/DataTables/DataTables-1.10.21/js/jquery.dataTables.min.js",
+                     //"~/vendors/DataTables/DataTables-1.10.21/js/dataTables.bootstrap.min.js",
+                     //"~/Scripts/src/SweetAlert2.js",
+                     //"~/vendors/fullcalendar/dist/fullcalendar.js",
+                     //"~/vendors/fullcalendar/dist/fullcalendar.min.js",
+                     //"~/vendors/moment/min/moment.min.js",
+                     //"~/Football/js/common.js"
                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/vendors/bootstrap/dist/css/bootstrap.min.css",
-                      "~/vendors/font-awesome/css/font-awesome.min.css",
-                      "~/vendors/nprogress/nprogress.css",
-                      "~/build/css/custom.min.css",
-                      "~/vendors/DataTables/DataTables-1.10.21/css/dataTables.bootstrap.min.css",
-                      "~/vendors/DataTables/DataTables-1.10.21/css/jquery.dataTables.min.css"
+                      //"~/Content/bootstrap.css",
+                      //"~/Content/site.css",
+                      //"~/vendors/bootstrap/dist/css/bootstrap.min.css",
+                      //"~/vendors/font-awesome/css/font-awesome.min.css",
+                      //"~/vendors/nprogress/nprogress.css",
+                      //"~/build/css/custom.min.css",
+                      //"~/vendors/DataTables/DataTables-1.10.21/css/dataTables.bootstrap.min.css",
+                      //"~/vendors/DataTables/DataTables-1.10.21/css/jquery.dataTables.min.css",
+                      //"~/vendors/fullcalendar/dist/fullcalendar.min.css",
+                      //"~/vendors/fullcalendar/dist/fullcalendar.print.css",
+                      // "~/vendors/fullcalendar/dist/fullcalendar.css"
                       ));
         }
     }

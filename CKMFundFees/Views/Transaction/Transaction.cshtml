@@ -1,4 +1,5 @@
-﻿
+﻿@model Models.TransactionModel
+
 @{
     ViewBag.Title = "Transaction";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,12 +9,12 @@
     <link href="~/Content/bootstrap-textbox.css" rel="stylesheet" />
 }
 <h2>Transaction</h2>
-<div class="container">
+<div id="divMain" class="container">
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
         <div class="content">
             <div class="card" style="background:#e0efea">
-                <div class="card-header card-block" style="background:#29323c;color:#dac7c7">
+                <div class="card-header card-block" style="background:#4e545a;color:#dac7c7">
                     <h2 style="text-align:center;">Transaction Form</h2>
                 </div>
                 <div class="card-body card-block">
@@ -54,16 +55,18 @@
                     <div class="row form-group">
                         <div class="col col-sm-5"></div>
                         <div class="col col-sm-6">
-                            <input type="button" id="btnSave" value="Save" class="btn btn-primary" />
-                            <button onclick="btnCancel_Click()" id="btnCancel" class="btn btn-danger">Cancel</button>
+                            @*<input type="button" id="btnSave" value="Save" class="btn btn-primary" />*@
+                            <button id="btnSave" onclick="btnSaveClick()" class="btn btn-primary"></button>
+                            <input type="button" id="btnCancel" value="Cancel" class="btn btn-danger" />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-3"></div>
+    <div class="col-lg-3"></div>
 </div>
+
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -75,7 +78,14 @@
                 <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
             <div class="modal-body">
-
+                <table id="tblUser1" class="tb1 col-sm-12" style="padding-left:0px;">
+                    <thead>
+                        <tr>
+                            <td>MemberID</td>
+                            <td>MemberName</td>
+                        </tr>
+                    </thead>
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -87,88 +97,132 @@
 @section Scripts
 {
     <script type="text/javascript">
+        $(document).ready(function () {
+            $("#txtTransactionID").focus();
+            var Mode = '@Model.Mode';
+            if (Mode == 'New') {
+                $('#btnSave').html('Save');
+            }
+            else if (Mode == 'Edit') {
+                $('#btnSave').html('Update');
+                $("#txtTransactionID").attr('disabled', 'disabled');
+                ShowData();
+            }
+            else {
+                $('#btnSave').html('Delete');
+                $("#btnSave").focus();
+                ShowData();
+            }
+            
+            $("#btnCancel").click(function () {
+                $('#txtTransactionID').val("");
+                $('#txtTransactionDate').val("");
+                $('#dropTransaction').val("");
+                $('#txtMemberID').val("");
+                $('#txtMemberName').val("");
+                $('#txtAmount').val("");
+                $('#txtRemark').val("");
+            });
+            $.ajax({
+                type: "POST",
+                url: "/api/TransactionAPI/Select_TransactionTypes",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers:
+                {
+                    Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
+                },
+                success: function (data) {
+                    $.each(data, function (i, item) {
+                        $("#dropTransaction").append($("<option></option>").val(item.TransactionTypeID).html(item.TransactionName));
+                    })
+                }
+            });
+            $("#tblUser1").DataTable({
+                "bFilter": false,
+                "bLengthChange": false,
+                "bInfo": false,
+                destroy: true,
+                "ajax": {
+                    "url": "/api/UserApi/SP_Select_MemberList",
+                    "type": "GET",
+                    "datatype": "json",
+                    dataSrc: "",
+                    headers:
+                    {
+                        Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
+                    },
+                },
+                "columns": [
+                    { "data": "MemberID" },
+                    { "data": "MemberName" }
+                ],
 
-$(document).ready(function () {
-$("#btnSave").click(function () {
-var Tmodel = {
-TransactionID: $('#txtTransactionID').val(),
-TransactionDate: $('#txtTransactionDate').val(),
-TransactionType: $('#dropTransaction').val(),
-MemberID: $('#txtMemberID').val(),
-MemberName: $('#txtMemberName').val(),
-Amount: $('#txtAmount').val(),
-Remarks: $('#txtRemark').val()
-}
+            });
 
-$.ajax({
-url: '/api/TransactionAPI/Insert_TransactionTypes',
-type: 'POST',
-dataType: 'json',
-data: Tmodel,
-headers:
-{
-Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
-},
-success: function (data) {
-var userdata = JSON.parse(data);
-if (userdata.length <0) {
-alert("Data Save successfully.")
-location.href = '@Url.Action("TransactionList", "Transaction")';
-}
-else {
-alert("The data can not save!")
-$('#txtTransactionID').val("");
-$('#txtTransactionDate').val("");
-$('#dropTransaction').val;
-$('#txtMemberID').val("");
-$('#txtMemberName').val("");
-$('#txtAmount').val("");
-$('#txtRemark').val("");         
-}
-},
-error: function (xhr, textStatus, errorThrown) {
-console.log('Error in Operation');
-}
-})
-});
-$("#btnCancel").click(function () {
-$('#txtTransactionID').val("");
-$('#txtTransactionDate').val("");
-$('#dropTransaction').val("");
-$('#txtMemberID').val("");
-$('#txtMemberName').val("");
-$('#txtAmount').val("");
-$('#txtRemark').val("");
-});
-$.ajax({
-type: "GET",
-url: "/api/TransactionAPI/Select_TransactionTypes",
-contentType: "application/json; charset=utf-8",
-dataType: "json",
-headers:
-{
-Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
-},
-success: function (data) {
+        });
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
+        
+        //set data
+        function ShowData() {
+            var Tmodel = {
+                TransactionID: '@Model.TransactionID',
+            };
 
-$.each(data, function (i, item) {
-$("#dropTransaction").append($("<option></option>").val(item.TransactionTypeID).html(item.TransactionName));
+            var data = CalltoApiController('@Url.Action("SP_Select_TransactionList", "api/TransactionApi")', Tmodel);
+            var transactiondata = JSON.parse(data);
+            $("#txtTransactionID").val(transactiondata[0].TransactionID);
+            $("#txtTransactionDate").val(transactiondata[0].TransactionDate);
+            $("#dropTransaction").val(transactiondata[0].TransactionType);
+            $("#txtMemberID").val(transactiondata[0].MemberID);
+            $("#txtMemberName").val(transactiondata[0].MemberName);
+            $("#txtAmount").val(transactiondata[0].Amount);
+            $("#txtRemark").val(transactiondata[0].Remarks);
+        }
+          //insert,update,delete
+        function DoProcess() {
+            focusControl = $("#txtTransactionID");
+            var Tmodel = {
+                TransactionID: $('#txtTransactionID').val(),
+                TransactionDate: $('#txtTransactionDate').val(),
+                TransactionType: $('#dropTransaction').val(),
+                MemberID: $('#txtMemberID').val(),
+                MemberName: $('#txtMemberName').val(),
+                Amount: $('#txtAmount').val(),
+                Remarks: $('#txtRemark').val(),
+                    Mode: '@Model.Mode'
+            };
+ 
+            var data = CalltoApiController('@Url.Action("Transaction_CUD", "api/TransactionApi")', Tmodel);
+            ShowSuccessMessage(data,'@Url.Action("TransactionList", "Transaction")');
+        }
 
-})
-}
-
-});
-
-});
-function isNumber(evt) {
-evt = (evt) ? evt : window.event;
-var charCode = (evt.which) ? evt.which : evt.keyCode;
-if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-return false;
-}
-return true;
-}
-
-
+        function DeleteConfrim() {
+            DoProcess();
+        }
+        //save
+        function btnSaveClick() {
+            alert("go");
+             var res = ErrorCheckOnSave();
+             if (res == "0") {
+                var Mode = '@Model.Mode';
+                //show confirm message
+                if (Mode == "Delete") {
+                    ShowConfirmMessage("M104", "DeleteConfrim");
+                }
+                else {
+                    DoProcess();
+                }
+            }
+            else
+                ShowErrorMessage(res);
+        }
     </script>
 }

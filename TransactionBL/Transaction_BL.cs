@@ -1,13 +1,8 @@
 ﻿using DL;
-using Models.CKMFundFees.Models;
-using System;
-using System.Collections.Generic;
+using Models;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+
 
 namespace TransactionBL
 {
@@ -17,20 +12,43 @@ namespace TransactionBL
         {
             BaseDL bdl = new BaseDL();
             return bdl.SelectDatatable("Sp_Select_TransactionType");
-        }
-
-        public string M_Insert_TransactionTypes(TransactionModel Tmodel)
+        }  
+        public string Transaction_CUD(TransactionModel Tmodel)
         {
             BaseDL bdl = new BaseDL();
-            Tmodel.Sqlprms = new SqlParameter[6];
-            Tmodel.Sqlprms[0] = new SqlParameter("@TransactionID", SqlDbType.VarChar) { Value = Tmodel.TransactionID };
-            Tmodel.Sqlprms[1] = new SqlParameter("@TransactionDate", SqlDbType.VarChar) { Value = Tmodel.TransactionDate };
-            Tmodel.Sqlprms[2] = new SqlParameter("@TransactionTypeID", SqlDbType.VarChar) { Value = Tmodel.TransactionType };
-            Tmodel.Sqlprms[3] = new SqlParameter("@MemberID", SqlDbType.VarChar) { Value = Tmodel.MemberID };
-            //Sqlprms[3] = new SqlParameter("@MemberName", SqlDbType.VarChar) { Value = Tmodel.MemberName };
-            Tmodel.Sqlprms[4] = new SqlParameter("@Amount", SqlDbType.VarChar) { Value = Tmodel.Amount };
-            Tmodel.Sqlprms[5] = new SqlParameter("@Remark", SqlDbType.VarChar) { Value = Tmodel.Remarks };
-            return bdl.InsertUpdateDeleteData("SP_Insert_Transaction", Tmodel.Sqlprms);
+            if (Tmodel.Mode.Equals("New"))
+            {
+                Tmodel.SPName = "SP_Insert_Transaction";
+                Tmodel.Sqlprms = new SqlParameter[6];
+                Tmodel.Sqlprms[0] = new SqlParameter("@TransactionID", SqlDbType.VarChar) { Value = Tmodel.TransactionID };
+                Tmodel.Sqlprms[1] = new SqlParameter("@TransactionDate", SqlDbType.VarChar) { Value = Tmodel.TransactionDate };
+                Tmodel.Sqlprms[2] = new SqlParameter("@TransactionTypeID", SqlDbType.VarChar) { Value = Tmodel.TransactionType };
+                Tmodel.Sqlprms[3] = new SqlParameter("@MemberID", SqlDbType.VarChar) { Value = Tmodel.MemberID };
+                //Sqlprms[3] = new SqlParameter("@MemberName", SqlDbType.VarChar) { Value = Tmodel.MemberName };
+                Tmodel.Sqlprms[4] = new SqlParameter("@Amount", SqlDbType.VarChar) { Value = Tmodel.Amount };
+                Tmodel.Sqlprms[5] = new SqlParameter("@Remark", SqlDbType.VarChar) { Value = Tmodel.Remarks };
+                
+            }
+            else if (Tmodel.Mode.Equals("Edit"))
+            {
+                Tmodel.SPName = "SP_Update_Transaction";
+                Tmodel.Sqlprms = new SqlParameter[6];
+                Tmodel.Sqlprms[0] = new SqlParameter("@TransactionID", SqlDbType.VarChar) { Value = Tmodel.TransactionID };
+                Tmodel.Sqlprms[1] = new SqlParameter("@TransactionDate", SqlDbType.VarChar) { Value = Tmodel.TransactionDate };
+                Tmodel.Sqlprms[2] = new SqlParameter("@TransactionTypeID", SqlDbType.VarChar) { Value = Tmodel.TransactionType };
+                Tmodel.Sqlprms[3] = new SqlParameter("@MemberID", SqlDbType.VarChar) { Value = Tmodel.MemberID };
+                //Sqlprms[3] = new SqlParameter("@MemberName", SqlDbType.VarChar) { Value = Tmodel.MemberName };
+                Tmodel.Sqlprms[4] = new SqlParameter("@Amount", SqlDbType.VarChar) { Value = Tmodel.Amount };
+                Tmodel.Sqlprms[5] = new SqlParameter("@Remark", SqlDbType.VarChar) { Value = Tmodel.Remarks };
+            }
+            else if (Tmodel.Mode.Equals("Delete"))
+            {
+                Tmodel.SPName = "SP_Delete_Transaction";
+                Tmodel.Sqlprms = new SqlParameter[1];
+                Tmodel.Sqlprms[0] = new SqlParameter("@TransactionID", SqlDbType.VarChar) { Value = Tmodel.TransactionID };
+            }
+
+            return bdl.SelectJson(Tmodel.SPName, Tmodel.Sqlprms);
         }
         public DataTable SP_Select_TransactionList()
         {

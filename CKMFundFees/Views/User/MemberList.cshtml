@@ -61,7 +61,7 @@
                     "data": "null",
                     "render": function (data, type, row) {
                         //return "<a href='/User/MemberEntry/" + data + "'>Edit</a>";
-                        return '<label><a href="#" onClick="btnEditClick(\'' + data + '\')" style="color:blue">Edit</a></label><label><a href="#" onClick="btnDelClick(\'' + data + '\')" style="color:red">Delete</a></label>';
+                        return '<label><a href="#" onClick="btnEditClick(\'' + row.MemberID + '\')" style="color:blue">Edit</a></label><label><a href="#" onClick="btnDelClick(\'' + row.MemberID + '\')" style="color:red">Delete</a></label>';
                     }
                 }]
             });
@@ -73,7 +73,7 @@
         location.href = '@Url.Action("MemberEntry", "User")?MemberID='+MemberID+'&Mode=Edit';
         }
         function btnDelClick(MemberID) {
-            location.href = '@Url.Action("MemberEntry", "User")?MemberEntry=' + MemberEntry+'&Mode=Delete';
+            location.href = '@Url.Action("MemberEntry", "User")?MemberID=' + MemberID+'&Mode=Delete';
         }
     </script>
 }
