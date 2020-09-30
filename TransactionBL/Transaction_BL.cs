@@ -50,10 +50,12 @@ namespace TransactionBL
 
             return bdl.SelectJson(Tmodel.SPName, Tmodel.Sqlprms);
         }
-        public DataTable SP_Select_TransactionList()
+        public string SP_Select_TransactionList(TransactionModel model)
         {
             BaseDL bdl = new BaseDL();
-            return bdl.SelectDatatable("SP_Select_TransactionList");
+            model.Sqlprms = new SqlParameter[1];           
+            model.Sqlprms[0] = new SqlParameter("@TransactionID", model.TransactionID);
+            return bdl.SelectJson("SP_Select_TransactionList",model.Sqlprms);
         }
     }
 }

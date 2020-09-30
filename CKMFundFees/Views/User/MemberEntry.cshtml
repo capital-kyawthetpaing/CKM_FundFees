@@ -10,7 +10,7 @@
             <div class="x_panel">
                 <div class="x_title">
                     <h2>MemberInfo</h2>
-                    <ul class="nav navbar-right panel_toolbox">
+                    @*<ul class="nav navbar-right panel_toolbox">
                         <li>
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -29,7 +29,7 @@
                             <a class="close-link"><i class="fa fa-close"></i></a>
                         </li>
                     </ul>
-                    <div class="clearfix"></div>
+                    <div class="clearfix"></div>*@
                 </div>
                 <div class="x_content"></div>
                 <div id="wizard" class="form_wizard wizard_horizontal">
@@ -60,7 +60,7 @@
                                     MemberID
                                 </label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input type="text" id="txtMId" required="required" class="form-control-label" style="width:100%">
+                                    <input type="text" id="txtMId" required="required" class="form-control-sm" style="width:40%">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -68,35 +68,48 @@
                                     MemberName  
                                 </label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input type="text" id="txtMName" name="ID" required="required" class="form-control-label" style="width:100%">
+                                    <input type="text" id="txtMName" name="ID" required="required" class="form-control-sm" style="width:40%">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align">Password</label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input id="txtMpassword" class="form-control-label " type="text" name="password" style="width:100%">
+                                    <input id="txtMpassword" class="form-control-sm " type="text" name="password" style="width:40%">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align">PhoneNumber</label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input type="text" id="txtMPh" style="width:100% " name="phoneno" class="form-control-label ">
+                                    <input type="text" id="txtMPh" style="width:40% " name="phoneno" class="form-control-sm ">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align">JoinDate</label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input id="txtMJoin" type="date" style="width:100%" name="joindate" class="form-control-label ">
+                                    <input id="txtMJoin" type="date" style="width:40%" name="joindate" class="form-control-sm ">
                                 </div>
                             </div>
                         </form>
+                    </div>
+                    <div id="step-2">
+                        <div class="col-md-6">
+                            <table id="tblUser" style="padding-left:0px;">
+                                <thead>
+                                    <tr>
+                                        <td>PageName</td>
+                                        <td>CanRead</td>
+                                        <td>CanEdit</td>
+                                        <td>CanDelete</td>                                        
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                     </div>
                     <div><br /></div>
                     <div> <br /></div>
 
                     <div class="actionBar">
                         <div>
-                            
                             <a href="#" class="buttonFinish buttonDisabled btn btn-default" id="btnFinish">Finish</a>
                             <a href="#" class="buttonNext btn btn-success">Next</a>
                             <a href="#" class="buttonPrevious buttonDisabled btn btn-primary">Previous</a>

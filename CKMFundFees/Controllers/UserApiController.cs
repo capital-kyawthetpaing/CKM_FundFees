@@ -32,15 +32,12 @@ namespace CKMFundFees.Controllers
         //}
 
         [UserAuthentication]
-        [HttpGet]
+        [HttpPost]
         [ActionName("Sp_Select_MemberList")]
-        public IHttpActionResult Sp_Select_MemberList()
+        public IHttpActionResult Sp_Select_MemberList([FromBody]UserModel Umodel)
         {
-
             User_BL Ubl = new User_BL();
-            DataTable dt = Ubl.Sp_Select_MemberList();
-            return Ok(dt);
-            //return Ubl.Sp_Select_MemberList();
+            return Ok(Ubl.Sp_Select_MemberList(Umodel));
         }
 
         [UserAuthentication]

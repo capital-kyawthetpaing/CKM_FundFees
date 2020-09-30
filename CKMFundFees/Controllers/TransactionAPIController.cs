@@ -29,12 +29,10 @@ namespace CKMFundFees.Controllers
         [UserAuthentication]
         [HttpPost]
         [ActionName("SP_Select_TransactionList")]
-        public IHttpActionResult SP_Select_TransactionList()
+        public IHttpActionResult SP_Select_TransactionList([FromBody]TransactionModel Tmodel)
         {
-
             Transaction_BL Tbl = new Transaction_BL();
-            DataTable dt = Tbl.SP_Select_TransactionList();
-            return Ok(dt);
+            return Ok(Tbl.SP_Select_TransactionList(Tmodel));
         }
     }
 }
