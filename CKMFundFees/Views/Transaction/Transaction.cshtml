@@ -172,11 +172,12 @@
         
         //set data
         function ShowData() {
+
             var Tmodel = {
                 TransactionID: '@Model.TransactionID',
             };
 
-            var data = CalltoApiController('@Url.Action("SP_Select_TransactionList", "api/TransactionApi")', Tmodel);
+            var data = CalltoApiController('@Url.Action("SP_Select_TransactionList", "api/TransactionApi")', Tmodel);  
             var transactiondata = JSON.parse(data);
             $("#txtTransactionID").val(transactiondata[0].TransactionID);
             $("#txtTransactionDate").val(transactiondata[0].TransactionDate);
@@ -209,7 +210,6 @@
         }
         //save
         function btnSaveClick() {
-            alert("go");
              var res = ErrorCheckOnSave();
              if (res == "0") {
                 var Mode = '@Model.Mode';

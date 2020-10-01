@@ -31,13 +31,30 @@ namespace DL
                 newCon.Open();
                 adapt.SelectCommand.CommandType = CommandType.StoredProcedure;
                 if (para != null)
+                {
+                    para = ChangeToDBNull(para);
                     adapt.SelectCommand.Parameters.AddRange(para);
+                }
                 adapt.Fill(dt);
                 newCon.Close();
             }
             return DataTableToJSONWithJSONNet(dt);
         }
+        
 
+        private SqlParameter[] ChangeToDBNull(SqlParameter[] para)
+        {
+            foreach (var p in para)
+            {
+                if (p.Value == null || string.IsNullOrWhiteSpace(p.Value.ToString()))
+                {
+                    p.Value = DBNull.Value;
+                    p.SqlValue = DBNull.Value;
+                }
+            }
+
+            return para;
+        }
         public DataTable SelectDatatable(string sSQL, params SqlParameter[] para)
 
         {
