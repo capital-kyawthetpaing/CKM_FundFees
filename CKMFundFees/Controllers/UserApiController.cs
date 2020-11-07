@@ -49,6 +49,15 @@ namespace CKMFundFees.Controllers
             return Ok(Tbl.SP_Insert_MemberEntry(Umodel));
         }
 
+        [UserAuthentication]
+        [HttpPost]
+        [ActionName("SP_Select_PageList")]
+        public IHttpActionResult SP_Select_PageList([FromBody]EntryModel Umodel)
+        {
+            User_BL Ubl = new User_BL();
+            return Ok(Ubl.SP_Select_PageList(Umodel));
+        }
+
 
     }
 }

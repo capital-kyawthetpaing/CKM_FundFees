@@ -40,6 +40,14 @@ namespace UserBL
             return bdl.InsertUpdateDeleteData("SP_Insert_MemberEntry", Umodel.Sqlprms);
         }
 
+        public string SP_Select_PageList(EntryModel Umodel)
+        {
+            BaseDL bdl = new BaseDL();
+            Umodel.Sqlprms = new SqlParameter[1];
+            Umodel.Sqlprms[0] = new SqlParameter("@PageID", Umodel.PageID);
+            return bdl.SelectJson("SP_Select_PageList", Umodel.Sqlprms);
+        }
+
     }
     }
 
