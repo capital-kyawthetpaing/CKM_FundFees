@@ -20,14 +20,14 @@ namespace UserBL
             Umodel.Sqlprms[1] = new SqlParameter("@Password", SqlDbType.VarChar) { Value = Umodel.Password };
             return bdl.SelectJson("SP_Select_Login", Umodel.Sqlprms);
         }
-
-        
-            public DataTable Sp_Select_MemberList()
-            {
-                BaseDL bdl = new BaseDL();
-                return bdl.SelectDatatable("Sp_Select_MemberList");
-            }
-
+ 
+        public string Sp_Select_MemberList(UserModel model)
+        {
+            BaseDL bdl = new BaseDL();
+            model.Sqlprms = new SqlParameter[1];
+            model.Sqlprms[0] = new SqlParameter("@MemberID", model.MemberID);
+            return bdl.SelectJson("Sp_Select_MemberList", model.Sqlprms);
+        }
         public string SP_Insert_MemberEntry(UserModel Umodel)
         {
             BaseDL bdl = new BaseDL();

@@ -33,21 +33,16 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
+             var Umodel = {
+                MemberID: '',
+            };
+            var data = CalltoApiController('@Url.Action("Sp_Select_MemberList", "api/UserApi")', Umodel);
             $("#tblUser").DataTable({
                 "bFilter": false,
                 "bLengthChange": false,
                 "bInfo": false,
                 destroy: true,
-                "ajax": {
-                    "url": "/api/UserApi/SP_Select_MemberList",
-                    "type": "GET",
-                    "datatype": "json",
-                    dataSrc: "",
-                    headers:
-                    {
-                        Authorization: 'Basic ' + btoa('Capital_MM' + ':' + 'CKM12345!')
-                    },
-                },
+                data: JSON.parse(data),
                 "columns": [
                     { "data": "MemberID" },
                     { "data": "MemberName" },

@@ -28,11 +28,11 @@ namespace CKMFundFees
                      //"~/build/js/custom.min.js",
                      //"~/vendors/DataTables/DataTables-1.10.21/js/jquery.dataTables.min.js",
                      //"~/vendors/DataTables/DataTables-1.10.21/js/dataTables.bootstrap.min.js",
-                     //"~/Scripts/src/SweetAlert2.js",
+                     "~/Scripts/src/SweetAlert2.js",
                      //"~/vendors/fullcalendar/dist/fullcalendar.js",
                      //"~/vendors/fullcalendar/dist/fullcalendar.min.js",
                      //"~/vendors/moment/min/moment.min.js",
-                     //"~/Football/js/common.js"
+                     "~/Football/js/common.js"
                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
