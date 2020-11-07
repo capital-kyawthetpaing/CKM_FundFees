@@ -34,28 +34,24 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-
              var Tmodel = {
                 TransactionID: '',
             };
-
-         var data = CalltoApiController('@Url.Action("SP_Select_TransactionList", "api/TransactionApi")', Tmodel);
-            
-
-        $("#tblTransaction").DataTable({
-            "bFilter": false,
-            "bLengthChange": false,
-            "bInfo": false,
-            destroy: true,
-            data: JSON.parse(data),
-            "columns": [
-                { "data": "MemberName" },
-                { "data": "TransactionDate" },
-                { "data": "TransactionID" },
-                { "data": "Amount" },
-                { "data": "Remark" },
-                { "data": "" },
-            ],
+var data = CalltoApiController('@Url.Action("SP_Select_TransactionList", "api/TransactionApi")', Tmodel);
+$("#tblTransaction").DataTable({
+"bFilter": false,
+"bLengthChange": false,
+"bInfo": false,
+destroy: true,
+data: JSON.parse(data),
+    "columns": [
+    { "data": "MemberName" },
+    { "data": "TransactionDate" },
+    { "data": "TransactionID" },
+    { "data": "Amount" },
+    { "data": "Remark" },
+    { "data": "" }
+],
 
             "columnDefs": [{
                 "targets": 5,
